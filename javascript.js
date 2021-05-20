@@ -43,29 +43,27 @@ function renderBooks(books, location = 'library') {
         // console.log(parent.parentElement)
         parent.innerHTML = books.map(book => ` <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-5">
                             <div class="card mb-4 shadow-sm h-100">
-                          <img src="${book.img}" alt="" class="img-fluid h-75">
-                        <div class="card-body d-flex align-items-center">
-                          <div
-                            class="d-flex align-items-center"
-                          >
+                          <img src="${book.img}" alt="" class="img-fluid h-100">
+                        <div class="card-body">
+                            <p class="card-text text-truncate mb-1">${book.title}</p>
+                            <p class="card-text text-truncate mb-2">${book.category}</p>
+                          <div class="row d-flex justify-content-between px-2 pb-4">
                             <div class="btn-group">
                               <button
                                 type="button"
                                 class="btn btn-sm btn-outline-secondary"
                                 data-toggle="modal" data-target="#exampleModal"
-                                onclick="addToCart(event)"
-                              >
+                                onclick="addToCart(event)">
                               <i class="fas fa-cart-arrow-down pr-2"></i>
                               </button>
                               <button
                                 type="button"
                                 class="btn btn-sm btn-outline-secondary"
-                                onclick="removeCard(event)"
-                              >
+                                onclick="removeCard(event)">
                                 Ignore
                               </button>
-                            </div>
-                            <small class="text-muted ml-3"><strong>£ ${book.price}</strong></small>
+                              </div>
+                              <small class="text-muted btn-sm"><strong>£ ${book.price}</strong></small>
                           </div>
                         </div>
                       </div>
@@ -73,26 +71,24 @@ function renderBooks(books, location = 'library') {
     } else {
         parent.innerHTML = books.map(book => ` <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-5">
                             <div class="card mb-4 shadow-sm h-100">
-                          <img src="${book.img}" alt="" class="img-fluid">
+                          <img src="${book.img}" alt="" class="img-fluid h-100">
                         <div class="card-body">
-                          <div
-                            class="d-flex justify-content-between align-items-center"
-                          >
+                            <p class="card-text text-truncate mb-1">${book.title}</p>
+                            <p class="card-text text-truncate mb-2">${book.category}</p>
+                          <div class="row d-flex justify-content-between px-2 pb-4">
                             <div class="btn-group">
                               <button
                                 type="button"
                                 class="btn btn-sm btn-outline-secondary"
-                                onclick="removeFromCart(event)"
-                              >
+                                onclick="removeFromCart(event)">
                                 Remove
                               </button>
-                            </div>
-                            <small class="text-muted"> £ ${book.price}</small>
+                              </div>
+                              <small class="text-muted btn-sm"><strong>£ ${book.price}</strong></small>
                           </div>
                         </div>
                       </div>
                         </div>`).join('')
-
     }
 }
 
@@ -101,7 +97,7 @@ window.onload = () => {
     .then(response => response.json())
     .then(books => {
         bookCollection = books
-        // console.log(bookCollection)
+        console.log(bookCollection)
         renderBooks(bookCollection)
     })
     .catch((err) => console.error(err.message))

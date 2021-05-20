@@ -6,6 +6,10 @@ body {
     transform: scale(0.8); 
 }
 
+.card-body button {
+    border: none;
+
+}
 /* .selected::before {
     width: 100%;
     height: 100%;
