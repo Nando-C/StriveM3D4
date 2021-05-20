@@ -1,4 +1,14 @@
-let bookColletion = []
+let bookCollection = []
+let cartList = []
+
+const addToCart = (e) => {
+    const card = e.currentTarget.closest('.card')
+    console.log(card)
+    card.classList.add('selected')
+    cartList.push(card)
+    renderBooks(cartList, 'cart')
+    // console.log(cartList)
+}
 
 const removeCard = (e) => {
     const card = e.currentTarget.closest('.col-md-4')
@@ -7,7 +17,7 @@ const removeCard = (e) => {
 
 function renderBooks(books, location = 'library') {
     const parent = document.getElementById(location)
-
+    console.log(parent.parentElement)
     parent.innerHTML = books.map(book => ` <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                         <div class="card mb-4 shadow-sm">
                       <img src="${book.img}" alt="">
@@ -49,8 +59,17 @@ window.onload = () => {
     .then(response => response.json())
     .then(books => {
         // console.log(books)
-        bookColletion = books
+        bookCollection = books
 
-        renderBooks(books)
+        renderBooks(bookCollection)
     })
+}
+
+function search() {
+    const searchBar = document.getElementById('searchBar')
+    const bookQuery = searchBar.value
+
+    const searchResults = bookCollection.filter(book => book.title.includes(bookQuery))
+    console.log(bookCollection)
+    renderBooks(searchResults)
 }
