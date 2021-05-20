@@ -1,9 +1,12 @@
 body {
-    background-color: rgb(235, 245, 241);
+    background-color: whitesmoke;
 }
-
+.navbar {
+    background-color: rgb(240, 239, 233);
+}
 .selected {
     transform: scale(0.8); 
+    background-color: rgb(240, 245, 238);
 }
 
 .card-body button {
