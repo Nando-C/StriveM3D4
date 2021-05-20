@@ -19,57 +19,59 @@
 
                 <div class="row my-5">
                     <h1>Books Library</h1>
-                    <a href="cartList.html" type="button" class="btn btn-sm btn-outline-secondary ml-auto px-4 pt-3" >
+                    <a href="#myCart" type="button" class="btn btn-sm btn-outline-secondary ml-auto px-4 pt-3" >
                     <!-- <button  onclick="addToCart(event)"> -->
                         <i class="fas fa-cart-arrow-down pr-2"></i>
                         Cart
                     </a>
                 </div>
                 <!-- search bar -->
-                <div class="input-group mb-3" id="searchBar">
+                <div class="input-group mb-5" id="searchBar">
                     <input type="text" class="form-control" placeholder="Search Book" aria-label="Search Book" aria-describedby="button-addon2">
                     <div class="input-group-append">
                       <button class="btn btn-outline-secondary" type="button" onclick="search()" id="button-addon2">Search</button>
                     </div>
                 </div>
                 <div id="library" class="row">
+
                     <!-- <div class="col-md-4">
                         <div class="card mb-4 shadow-sm">
-                      <img src="${img.large_url}" alt="">
-                    <div class="card-body">
-                      <p class="card-text">
-                        This is a wider card with supporting text below as a natural
-                        lead-in to additional content. This content is a little bit
-                        longer.
-                      </p>
-                      <div
-                        class="d-flex justify-content-between align-items-center"
-                      >
-                        <div class="btn-group">
-                          <button
-                            type="button"
-                            class="btn btn-sm btn-outline-secondary"
-                            data-toggle="modal" data-target="#exampleModal"
-                            onclick="addToCart(event)"
-                          >
-                            Add to Cart
-                          </button>
-                          <button
-                            type="button"
-                            class="btn btn-sm btn-outline-secondary"
-                            onclick="removeCard(event)"
-                          >
-                            Ignore
-                          </button>
+                            <img src="https://imgcomfort.com/Userfiles/Upload/images/illustration-geiranger.jpg" alt="">
+                            <div class="card-body h-25">
+                            <p class="card-text">
+                                This is a wider card with supporting text below as a natural
+                                lead-in to additional content. This content is a little bit
+                                longer.
+                            </p>
+                            <div
+                                class="d-flex justify-content-between align-items-center"
+                            >
+                                <div class="btn-group">
+                                <button
+                                    type="button"
+                                    class="btn btn-sm btn-outline-secondary"
+                                    data-toggle="modal" data-target="#exampleModal"
+                                    onclick="addToCart(event)"
+                                >
+                                    Add to Cart
+                                </button>
+                                <button
+                                    type="button"
+                                    class="btn btn-sm btn-outline-secondary"
+                                    onclick="removeCard(event)"
+                                >
+                                    Ignore
+                                </button>
+                                </div>
+                                <small class="text-muted">${img.id}</small>
+                            </div>
+                            </div>
                         </div>
-                        <small class="text-muted">${img.id}</small>
-                      </div>
-                    </div>
-                  </div>
                     </div> -->
+
                 </div>
                 <hr>
-                <section>
+                <section id="myCart">
                     <h2>Books In Cart</h2>
                     <div id="cart" class="row">
                     </div>

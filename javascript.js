@@ -9,7 +9,7 @@ const addToCart = (e) => {
     // console.log(addBook)
     cartList.push(addBook)
     renderBooks(cartList, 'cart')
-    console.log(cartList)
+    // console.log(cartList)
 }
 
 const removeFromCart = (e) => {
@@ -36,10 +36,10 @@ function renderBooks(books, location = 'library') {
         // console.log(parent.parentElement)
         parent.innerHTML = books.map(book => ` <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-5">
                             <div class="card mb-4 shadow-sm h-100">
-                          <img src="${book.img}" alt="" class="img-fluid">
-                        <div class="card-body">
+                          <img src="${book.img}" alt="" class="img-fluid h-75">
+                        <div class="card-body d-flex align-items-center">
                           <div
-                            class="d-flex justify-content-between align-items-center"
+                            class="d-flex align-items-center"
                           >
                             <div class="btn-group">
                               <button
@@ -48,7 +48,7 @@ function renderBooks(books, location = 'library') {
                                 data-toggle="modal" data-target="#exampleModal"
                                 onclick="addToCart(event)"
                               >
-                                Add to Cart
+                              <i class="fas fa-cart-arrow-down pr-2"></i>
                               </button>
                               <button
                                 type="button"
@@ -58,7 +58,7 @@ function renderBooks(books, location = 'library') {
                                 Ignore
                               </button>
                             </div>
-                            <small class="text-muted"> £ ${book.price}</small>
+                            <small class="text-muted ml-3"><strong>£ ${book.price}</strong></small>
                           </div>
                         </div>
                       </div>
@@ -87,7 +87,6 @@ function renderBooks(books, location = 'library') {
                         </div>`).join('')
 
     }
-
 }
 
 window.onload = () => {
@@ -95,18 +94,16 @@ window.onload = () => {
     .then(response => response.json())
     .then(books => {
         bookCollection = books
-        console.log(bookCollection)
-
+        // console.log(bookCollection)
         renderBooks(bookCollection)
     })
     .catch((err) => console.error(err.message))
 }
 
 function search() {
-    const searchBar = document.getElementById('searchBar')
+    const searchBar = document.querySelector('#searchBar>input')
     const bookQuery = searchBar.value
-//bookCOllection[0].title.includes("pandemic")
     const searchResults = bookCollection.filter(book => book.title.toLowerCase().includes(bookQuery.toLowerCase()))
-    console.log(searchResults)
+    // console.log(searchResults)
     renderBooks(searchResults)
 }
