@@ -9,7 +9,7 @@ const addToCart = (e) => {
     // console.log(addBook)
     cartList.push(addBook)
     renderBooks(cartList, 'cart')
-    // console.log(cartList)
+    console.log(cartList)
 }
 
 const removeFromCart = (e) => {
@@ -25,6 +25,13 @@ const removeFromCart = (e) => {
     // console.log(cartList)
 }
 
+const emptyCart = () => {
+    const cartSection = document.getElementById('cart')
+    cartSection.innerHTML = ''
+    cartList = []
+    console.log(cartList)
+
+}
 const removeCard = (e) => {
     const card = e.currentTarget.closest('.col-md-4')
     card.remove()
