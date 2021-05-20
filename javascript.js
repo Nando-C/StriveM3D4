@@ -3,10 +3,25 @@ let cartList = []
 
 const addToCart = (e) => {
     const card = e.currentTarget.closest('.card')
-    console.log(card)
-    card.classList.add('selected')
-    cartList.push(card)
+    card.classList.toggle('selected')
+    const imgUrl = e.currentTarget.closest('.card').children[0].src
+    const addBook = bookCollection.find(book => book.img === imgUrl)
+    // console.log(addBook)
+    cartList.push(addBook)
     renderBooks(cartList, 'cart')
+    console.log(cartList)
+}
+
+const removeFromCart = (e) => {
+    const card = e.currentTarget.closest('.col-md-4')
+    card.remove()
+    // card.classList.add('selected')
+    const imgUrl = e.currentTarget.closest('.card').children[0].src
+    const indexCartList = cartList.findIndex(book => book.img === imgUrl)
+    cartList.splice(indexCartList, 1)
+    // const returnedBook = bookCollection.find(book => book.img === imgUrl)
+    // returnedBook.classList.toggle('selected')
+    // console.log(returnedBook)
     // console.log(cartList)
 }
 
@@ -17,59 +32,81 @@ const removeCard = (e) => {
 
 function renderBooks(books, location = 'library') {
     const parent = document.getElementById(location)
-    console.log(parent.parentElement)
-    parent.innerHTML = books.map(book => ` <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                        <div class="card mb-4 shadow-sm">
-                      <img src="${book.img}" alt="">
-                    <div class="card-body">
-                      <p class="card-text">
-                        This is a wider card with supporting text below as a natural
-                        lead-in to additional content. This content is a little bit
-                        longer.
-                      </p>
-                      <div
-                        class="d-flex justify-content-between align-items-center"
-                      >
-                        <div class="btn-group">
-                          <button
-                            type="button"
-                            class="btn btn-sm btn-outline-secondary"
-                            data-toggle="modal" data-target="#exampleModal"
-                            onclick="addToCart(event)"
+    if(location === 'library'){
+        // console.log(parent.parentElement)
+        parent.innerHTML = books.map(book => ` <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-5">
+                            <div class="card mb-4 shadow-sm h-100">
+                          <img src="${book.img}" alt="" class="img-fluid">
+                        <div class="card-body">
+                          <div
+                            class="d-flex justify-content-between align-items-center"
                           >
-                            Add to Cart
-                          </button>
-                          <button
-                            type="button"
-                            class="btn btn-sm btn-outline-secondary"
-                            onclick="removeCard(event)"
-                          >
-                            Ignore
-                          </button>
+                            <div class="btn-group">
+                              <button
+                                type="button"
+                                class="btn btn-sm btn-outline-secondary"
+                                data-toggle="modal" data-target="#exampleModal"
+                                onclick="addToCart(event)"
+                              >
+                                Add to Cart
+                              </button>
+                              <button
+                                type="button"
+                                class="btn btn-sm btn-outline-secondary"
+                                onclick="removeCard(event)"
+                              >
+                                Ignore
+                              </button>
+                            </div>
+                            <small class="text-muted"> £ ${book.price}</small>
+                          </div>
                         </div>
-                        <small class="text-muted"> £ ${book.price}</small>
                       </div>
-                    </div>
-                  </div>
-                    </div>`).join('')
+                        </div>`).join('')
+    } else {
+        parent.innerHTML = books.map(book => ` <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-5">
+                            <div class="card mb-4 shadow-sm h-100">
+                          <img src="${book.img}" alt="" class="img-fluid">
+                        <div class="card-body">
+                          <div
+                            class="d-flex justify-content-between align-items-center"
+                          >
+                            <div class="btn-group">
+                              <button
+                                type="button"
+                                class="btn btn-sm btn-outline-secondary"
+                                onclick="removeFromCart(event)"
+                              >
+                                Remove
+                              </button>
+                            </div>
+                            <small class="text-muted"> £ ${book.price}</small>
+                          </div>
+                        </div>
+                      </div>
+                        </div>`).join('')
+
+    }
+
 }
 
 window.onload = () => {
     fetch('https://striveschool-api.herokuapp.com/books')
     .then(response => response.json())
     .then(books => {
-        // console.log(books)
         bookCollection = books
+        console.log(bookCollection)
 
         renderBooks(bookCollection)
     })
+    .catch((err) => console.error(err.message))
 }
 
 function search() {
     const searchBar = document.getElementById('searchBar')
     const bookQuery = searchBar.value
-
-    const searchResults = bookCollection.filter(book => book.title.includes(bookQuery))
-    console.log(bookCollection)
+//bookCOllection[0].title.includes("pandemic")
+    const searchResults = bookCollection.filter(book => book.title.toLowerCase().includes(bookQuery.toLowerCase()))
+    console.log(searchResults)
     renderBooks(searchResults)
 }
